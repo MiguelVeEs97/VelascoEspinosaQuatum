@@ -24,6 +24,20 @@ bqm=dwavebinarycsp.stitch(csp)
 response=sampler.sample(bqm,num_reads=5000)
 print(response)
 
+#Ponerlo legible
+total=0
+for sample, energy, occurences in response.data(['sample', 'energy', 'num_occurrences']):
+    total = occurences+total
+    horario = 'Horario de trabajo' if sample['horario'] else 'Fuera de horario'
+    ubicacion = 'presencial' if sample['ubicacion'] else 'remota'
+    duracion = 'corta' if sample['duracion'] else 'larga'
+    asistencia = 'obligatoria' if sample['asistencia'] else 'opcional'
+
+    print("{}: {} sesion de tipo {}, de duracion {} con asistencia {}"
+    .format(occurences,horario,ubicacion,duracion,asistencia))
+
+
+
 
 
 
