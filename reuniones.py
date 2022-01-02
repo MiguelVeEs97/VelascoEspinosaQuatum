@@ -2,8 +2,8 @@ import dwavebinarycsp
 from dwave.system.samplers import DWaveSampler
 from dwave.system.composites import EmbeddingComposite
 
-sampler = EmbeddingComposite(DWaveSampler())
-# sampler = EmbeddingComposite(DWaveSampler(solver='DW_2000Q_6'))
+#sampler = EmbeddingComposite(DWaveSampler())
+sampler = EmbeddingComposite(DWaveSampler(solver='DW_2000Q_6'))
 # sampler = EmbeddingComposite(DWaveSampler(solver=dict(topology__type='pegasus')))
 
 ##############################################################
