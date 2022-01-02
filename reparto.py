@@ -38,4 +38,19 @@ response = sampler.sample(bqm, num_reads=6000)
 print(response)
 
 #Lo mostramos de una manera legible
-for 
+total = 0
+for sample, energy, occurences in response.data(['sample', 'energy', 'occurences']):
+    total = occurences+total
+    mercancia = 'Congelado' if sample['mercancia'] else 'No congelado'
+    cliente = 'prioritario' if sample['cliente'] else 'no prioritario'
+    tiempo = 'corto' if sample['tiempo'] else 'largo'
+    km = 'menor de 200 km' if sample['km'] else 'mayor de 200 km'
+    transporte = 'una camioneta' if sample['transporte'] else 'otro transporte distinto a la camioneta'
+
+    print('''
+    {}: La mercancía {} a un cliente {} debe de entregarse en un tiempo {} 
+    siendo el trayecto {} y el transporte empleado es {}
+    '''.format(mercancia,cliente,tiempo,km,transporte))
+
+            
+
