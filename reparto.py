@@ -21,14 +21,14 @@ def organizacion(mercancia, cliente, tiempo, km, transporte):
     elif cliente:
         return(tiempo and transporte)
     else:
-        return(km and not transporte))
+        return(km and not transporte)
 
 #Creamos el problema binario
 csp=dwavebinarycsp.ConstraintSatisfactionProblem(dwavebinarycsp.BINARY)
 csp.add_constraint(organizacion,['mercancia', 'cliente', 'tiempo', 'km', 'transporte'])
 
 #Generamos ahora la función energía
-bqm=dwavebinarycps.stitch(cps)
+bqm=dwavebinarycsp.stitch(csp)
 
 #Sampleamos ahora 6000 puntos y buscamos los mínimos absolutos
 response = sampler.sample(bqm, num_reads=6000)
@@ -39,7 +39,7 @@ print(response)
 
 #Lo mostramos de una manera legible
 total = 0
-for sample, energy, occurences in response.data(['sample', 'energy', 'occurences']):
+for sample, energy, occurences in response.data(['sample', 'energy', 'num_occurences']):
     total = occurences+total
     mercancia = 'Congelado' if sample['mercancia'] else 'No congelado'
     cliente = 'prioritario' if sample['cliente'] else 'no prioritario'
@@ -50,7 +50,7 @@ for sample, energy, occurences in response.data(['sample', 'energy', 'occurences
     print('''
     {}: La mercancía {} a un cliente {} debe de entregarse en un tiempo {} 
     siendo el trayecto {} y el transporte empleado es {}
-    '''.format(mercancia,cliente,tiempo,km,transporte))
+    '''.format(occurences,mercancia,cliente,tiempo,km,transporte))
 
             
 
