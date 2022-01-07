@@ -5,7 +5,9 @@ import networkx as nx
 import dwave_networkx as dnx
 import matplotlib.pyplot as mpl
 
-#Ajustar el problema a DWave (Embedding) y obtener el samplear el problema y encontrar el mínimo (Sampler)
+#Ajustar el problema a DWave (Embedding) y obtener el sampler seleccionado
+#El sampler posteriormente ejecutará el problema, lo dejará correr y encontrará los mínimos al problema
+#Se lanzará un número de veces que se quiera, en este caso solamente una vez
 sampler = EmbeddingComposite(DWaveSampler())
 
 #Generar la estrella de 5 puntas
