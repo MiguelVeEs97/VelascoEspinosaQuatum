@@ -39,7 +39,7 @@ print(response)
 
 #Lo mostramos de una manera legible
 total = 0
-for sample, energy, occurences in response.data(['sample', 'energy', 'num_occurences']):
+for sample, energy, occurences in response.data(['sample', 'energy', 'num_occurrences']):
     total = occurences+total
     mercancia = 'Congelado' if sample['mercancia'] else 'No congelado'
     cliente = 'prioritario' if sample['cliente'] else 'no prioritario'
